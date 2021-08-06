@@ -1,0 +1,20 @@
+version: "3"
+services:
+  mysql:
+    image: dockerhub.ir/percona:ps-8.0.25-15
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: smlog
+      MYSQL_USER: smlog
+      MYSQL_PASSWORD: smlog
+    volumes:
+      - mysql:/var/lib/mysql
+  #app:
+  #  ports:
+  #    - 80:80
+  #  volumes:
+  #    - ./:/app
+volumes:
+  mysql: {}
