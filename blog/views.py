@@ -1,12 +1,20 @@
 from rest_framework import viewsets, generics
-from .serializers import PostSerializer
-from .models import Post
+from .serializers import PostSerializer, CommentSerializer
+from .models import Post, Comment
 
 
 class PostViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIView):
     """
     API endpoint that allows posts to be viewed or edited.
     """
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-created_at')
     serializer_class = PostSerializer
     lookup_field = "slug"
+
+
+class CommentViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIView):
+    """
+    API endpoint that allows posts to be viewed or edited.
+    """
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
