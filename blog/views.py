@@ -16,5 +16,5 @@ class CommentViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAP
     """
     API endpoint that allows posts to be viewed or edited.
     """
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.filter(reply_to=None)
     serializer_class = CommentSerializer
