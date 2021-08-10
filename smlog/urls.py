@@ -22,6 +22,8 @@ router = routers.DefaultRouter()
 router.register(r'posts', views.PostViewSet)
 router.register(r'comment', views.CreateCommentViewSet)
 router.register(r'comments', views.CommentViewSet)
+router.register(r'meta', views.BlogMetaViewSet)
+router.register(r'nav-links', views.NavLinkViewSet)
 router.register(r'comments/(?P<post>[^/.]+)', views.PostCommentViewSet, basename="post-comments")
 
 urlpatterns = [

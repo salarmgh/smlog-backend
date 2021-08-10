@@ -27,3 +27,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class BlogMeta(models.Model):
+    meta = models.JSONField()
+
+
+class NavLink(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=255)
