@@ -2,3 +2,5 @@ Django==3.2.6
 djangorestframework==3.12.4
 mysqlclient==2.0.3
 django-cors-headers==3.7.0
+jdatetime==3.6.2
+persiantools==2.1.2
