@@ -2,15 +2,32 @@ version: "3"
 services:
   mysql:
     image: dockerhub.ir/percona:ps-8.0.25-15
-    ports:
-      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: smlog
       MYSQL_USER: smlog
       MYSQL_PASSWORD: smlog
+    ports:
+      - 3306:3306
     volumes:
       - mysql:/var/lib/mysql
+  redis:
+    image: dockerhub.ir/redis:6.2.5
+    ports:
+      - 6379:6379
+  elasticsearch:
+    image: dockerhub.ir/elasticsearch:7.14.0
+    volumes:
+      - elasticsearch:/var/lib/elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+      discovery.type: single-node
+  kibana:
+    image: dockerhub.ir/kibana:7.14.0
+    ports:
+      - 5601:5601
   #app:
   #  ports:
   #    - 80:80
@@ -18,3 +35,4 @@ services:
   #    - ./:/app
 volumes:
   mysql: {}
+  elasticsearch: {}

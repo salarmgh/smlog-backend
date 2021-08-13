@@ -16,18 +16,28 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+import debug_toolbar
 from blog import views
 
 router = routers.DefaultRouter()
+router.register(r'categories', views.CategoryViewSet)
 router.register(r'posts', views.PostViewSet)
+router.register(r'page', views.CustomPageViewSet)
 router.register(r'comment', views.CreateCommentViewSet)
 router.register(r'comments', views.CommentViewSet)
 router.register(r'meta', views.BlogMetaViewSet)
 router.register(r'nav-links', views.NavLinkViewSet)
 router.register(r'comments/(?P<post>[^/.]+)', views.PostCommentViewSet, basename="post-comments")
+router.register(r'category/(?P<name>[^/.]+)', views.PostCategoryViewSet, basename="category-posts")
+router.register(
+    prefix=r'search',
+    basename='posts_documents',
+    viewset=views.PostDocumentViewSet
+)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
