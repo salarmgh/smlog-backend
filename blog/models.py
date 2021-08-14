@@ -13,7 +13,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     slug = models.SlugField(allow_unicode=True, unique=True, max_length=255)
-    category= models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -32,12 +32,12 @@ class Post(models.Model):
         }
 
 
-
 class Comment(models.Model):
     name = models.CharField(max_length=100)
     content = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
+    reply_to = models.ForeignKey(
+        "self", on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     approve = models.BooleanField(default=False)
 
@@ -55,6 +55,7 @@ class NavLink(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class CustomPage(models.Model):
     title = models.TextField()
